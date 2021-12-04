@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     const string jump = "Jump";
     Animator animator;
     bool facingRight = true;
+    bool isCrouching = false;
+
 
     private void Awake()
     {
@@ -19,35 +21,33 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        Movement(horizontal);
 
-        if(Mathf.Abs(horizontal)>0 || vertical>0)
-        {
-            Debug.Log("h and v");
-            Movement(horizontal,vertical);
-        }
+        bool canJump = Input.GetKey(KeyCode.Space);
+        Jump(canJump);
+
     }
 
-    void Movement(float h,float v)
+    void Movement(float h)
     {
-       
-        if (Mathf.Abs(h)>0)
+        if (Mathf.Abs(h) > 0)
         {
-            Debug.Log(h);
-            if (h>0)
+            if (h > 0)
             {
                 if (!facingRight) flip();
             }
-            else if (h<0)
+            else if (h < 0)
             {
                 if (facingRight) flip();
             }
             animator.SetFloat(speed, Mathf.Abs(h));
         }
-        else if(v>0)
-        {
+    }
+    void Jump(bool canJump)
+    {
+        if(canJump) animator.SetBool(jump, true);
 
-        }
+        else animator.SetBool(jump,false);
     }
 
     void flip()
