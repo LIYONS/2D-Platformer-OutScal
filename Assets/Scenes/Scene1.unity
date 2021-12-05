@@ -241,7 +241,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bfd76413de651148b0fc9167a7cedd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 8
+  playerSpeed: 10
+  jumpForce: 6
+  fallGravity: 3
   groundPoint: {fileID: 1298443210}
   groundLayer:
     serializedVersion: 2
@@ -268,7 +270,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &52204723
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -449,7 +451,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 1}
+  m_Size: {x: 50, y: 1}
   m_EdgeRadius: 0
 --- !u!4 &1849363239
 Transform:

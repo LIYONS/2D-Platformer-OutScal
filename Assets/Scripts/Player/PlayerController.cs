@@ -11,12 +11,16 @@ public class PlayerController : MonoBehaviour
     const string isJumping = "IsJumping";
     const string grounded = "IsGrounded";
     Animator animator;
+
+    //Movement
     bool facingRight = true;
+    [SerializeField] float playerSpeed;
 
 
     //Jump
     Rigidbody2D rb;
     [SerializeField] float jumpForce;
+    [SerializeField] float fallGravity;
 
     //Ground-Check
     [SerializeField] Transform groundPoint;
@@ -53,6 +57,7 @@ public class PlayerController : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         //Jump
         if (Input.GetKeyDown(KeyCode.Space)) Jump();
+        if (rb.velocity.y < 0) rb.gravityScale = fallGravity; else rb.gravityScale = 1;
         JumpAnimation();
         //Crouch
         Crouch(Input.GetKey(KeyCode.LeftControl));
@@ -90,6 +95,9 @@ public class PlayerController : MonoBehaviour
                 if (facingRight) flip();
             }
             animator.SetFloat(speed, Mathf.Abs(h));
+            if (!isGrounded) rb.velocity = new Vector2(h * .5f * playerSpeed, rb.velocity.y);
+            else rb.velocity = new Vector2(h * playerSpeed, rb.velocity.y);
+
         }
     }
     void Jump()
