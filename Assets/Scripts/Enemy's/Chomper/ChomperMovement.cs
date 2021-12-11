@@ -6,7 +6,7 @@ using UnityEngine;
 public class ChomperMovement : MonoBehaviour
 {
     [SerializeField] float speed;
-    [SerializeField] Transform groungPoint;
+    [SerializeField] Transform groundPoint;
     [SerializeField] float waitingTime;
     [SerializeField] LayerMask groundLayer;
     Animator animator;
@@ -22,7 +22,7 @@ public class ChomperMovement : MonoBehaviour
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         facingRight = true;
         canPatrol = true;
@@ -31,10 +31,9 @@ public class ChomperMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        isGrounded = Physics2D.OverlapCircle(groungPoint.position, .3f, groundLayer);
-
+        isGrounded = Physics2D.OverlapCircle(groundPoint.position, .3f, groundLayer);
         if (!isGrounded) rb.velocity = Vector2.zero;
-        if(!isWaiting) Movement();
+        if (!isWaiting) Movement();
 
         if (isWaiting) WaitAtCorner();
     }
@@ -72,7 +71,7 @@ public class ChomperMovement : MonoBehaviour
         }
     }
 
-    void Flip()
+    public void Flip()
     {
         facingRight = !facingRight;
         transform.localScale=new Vector3( transform.localScale.x *-1,transform.localScale.y,transform.localScale.z);
@@ -81,5 +80,13 @@ public class ChomperMovement : MonoBehaviour
     public void SetCanPatrol(bool status)
     {
         canPatrol = status;
+    }
+    public bool GetFacingRight()
+    {
+        return facingRight;
+    }
+    public float GetSpeed()
+    {
+        return speed;
     }
 }
