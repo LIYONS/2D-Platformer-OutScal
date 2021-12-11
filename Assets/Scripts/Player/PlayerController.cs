@@ -49,21 +49,20 @@ public class PlayerController : MonoBehaviour
         //Ground-Check
         isGrounded = Physics2D.OverlapCircle(groundPoint.position, 1f, groundLayer);
         animator.SetBool(grounded, isGrounded);
-    }
-    private void Update()
-    {
-        
+
         //Movement
         float horizontal = Input.GetAxis("Horizontal");
+        Movement(horizontal);
+       
+    }
+    private void Update()
+    {   
         //Jump
         if (Input.GetKeyDown(KeyCode.Space)) Jump();
         if (rb.velocity.y < 0) rb.gravityScale = fallGravity; else rb.gravityScale = 1;
         JumpAnimation();
         //Crouch
         Crouch(Input.GetKey(KeyCode.LeftControl));
-        //Movement
-        Movement(horizontal);
-        
     }
     void Crouch(bool status)
     { 
@@ -102,7 +101,7 @@ public class PlayerController : MonoBehaviour
     }
     void Jump()
     {
-        rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);  
+        rb.AddForce(new Vector2(0, jumpForce),ForceMode2D.Impulse);  
     }
     void JumpAnimation()
     {
