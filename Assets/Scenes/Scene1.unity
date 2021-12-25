@@ -244,8 +244,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 10
-  jumpForce: 9
-  fallGravity: 3
+  jumpForce: 18
+  fallGravity: 6
   groundPoint: {fileID: 1298443210}
   groundLayer:
     serializedVersion: 2
@@ -265,7 +265,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 4.5
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -1086,11 +1086,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5091047893724008061, guid: 035a192513195574bbd2fdfe126fabb8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.5110917
+      value: 19.48
       objectReference: {fileID: 0}
     - target: {fileID: 5091047893724008061, guid: 035a192513195574bbd2fdfe126fabb8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.6863935
+      value: 2.8
       objectReference: {fileID: 0}
     - target: {fileID: 5091047893724008061, guid: 035a192513195574bbd2fdfe126fabb8, type: 3}
       propertyPath: m_LocalPosition.z
