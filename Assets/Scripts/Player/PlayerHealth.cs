@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -7,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] Image[] hearts;
+    [SerializeField] GameOverUI gameOverScript;
+
     int heartCount;
 
     Animator animator;
@@ -34,11 +35,11 @@ public class PlayerHealth : MonoBehaviour
     public void KillPlayer()
     {
         animator.Play("PlayerDeath");
-        Invoke("RestartLevel", .5f);
+        Invoke("LoadGameOver", .5f);
 
     }
-    void RestartLevel()
+    void LoadGameOver()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        gameOverScript.GameOver();
     }
 }

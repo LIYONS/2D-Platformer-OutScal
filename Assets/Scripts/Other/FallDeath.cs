@@ -8,13 +8,8 @@ public class FallDeath : MonoBehaviour
     {
         if(collision.gameObject.tag=="Player")
         {
-            KillPlayer(collision.gameObject);
-
+            PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+            playerHealth.KillPlayer();
         }
-    }
-
-    public void KillPlayer(GameObject player)
-    {
-        Debug.Log("Player is dead");
     }
 }
