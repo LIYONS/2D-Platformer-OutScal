@@ -3263,6 +3263,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameOverCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6638464984950461270, guid: ef249c5592dc0694a890b0cc76451559, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6638464984950463657, guid: ef249c5592dc0694a890b0cc76451559, type: 3}
       propertyPath: GUI
       value: 
