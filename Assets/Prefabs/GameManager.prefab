@@ -10,6 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7375838973748321890}
   - component: {fileID: 7375838973748321885}
+  - component: {fileID: 1239358122}
+  - component: {fileID: 1239358123}
+  - component: {fileID: 2459230263905466645}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -43,3 +46,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f0b8a5b48ba73e46b9e162eeccf5b4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1239358122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7375838973748321884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf9b73f9ee74f1d4bbabbe29a2ad4ac5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GUI: {fileID: 0}
+  gameOvercanvas: {fileID: 0}
+--- !u!114 &1239358123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7375838973748321884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067aeeabbf8eeaa4187712c1e914da85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  winCanvas: {fileID: 0}
+--- !u!114 &2459230263905466645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7375838973748321884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5067bd411489e5e4d84ed80ebbefa5d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelNames:
+  - Lobby
+  - Level1
+  - Level2
+  - Level3
+  firstLvlBuildIndex: 1
