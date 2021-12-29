@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     [SerializeField] float jumpForce;
     [SerializeField] float fallGravity;
+    [SerializeField] int noOfJumps;
+    int jumpCount;
+
 
     //Ground-Check
     [SerializeField] Transform groundPoint;
@@ -44,6 +47,10 @@ public class PlayerController : MonoBehaviour
         normalSize = playerCollider.size;
         normalOffset = playerCollider.offset;
     }
+    private void Start()
+    {
+        jumpCount = noOfJumps;
+    }
     private void FixedUpdate()
     {
         //Ground-Check
@@ -53,7 +60,9 @@ public class PlayerController : MonoBehaviour
         //Movement
         float horizontal = Input.GetAxis("Horizontal");
         Movement(horizontal);
-       
+
+        //No.of jumps setting
+        if (isGrounded && jumpCount == 0) jumpCount = noOfJumps;
     }
     private void Update()
     {   
@@ -101,7 +110,9 @@ public class PlayerController : MonoBehaviour
     }
     void Jump()
     {
-        rb.AddForce(new Vector2(0, jumpForce),ForceMode2D.Impulse);  
+        if (jumpCount == 0) return;
+        rb.AddForce(new Vector2(0, jumpForce),ForceMode2D.Impulse);
+        jumpCount--;
     }
     void JumpAnimation()
     {

@@ -15,6 +15,9 @@ public class LevelWin : MonoBehaviour
         if(collision.gameObject.tag=="Player")
         {
             winCanvas.SetActive(true);
+            collision.gameObject.SetActive(false);
+            
+
             //Level Completed
             LevelManager.instance.SetLeveLStatus(SceneManager.GetActiveScene().name, LevelStatus.Completed);
             //NextLevel

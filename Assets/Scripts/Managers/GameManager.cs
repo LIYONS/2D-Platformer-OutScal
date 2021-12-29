@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     }
     public void LoadNextLevel()
     {
-        int targetBuildIndex = SceneManager.GetActiveScene().buildIndex;
+        int targetBuildIndex = SceneManager.GetActiveScene().buildIndex+1;
 
         LevelStatus levelStat = (LevelStatus) PlayerPrefs.GetInt(LevelManager.instance.levelNames[targetBuildIndex]);
 

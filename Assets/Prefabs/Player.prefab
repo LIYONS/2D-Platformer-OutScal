@@ -144,6 +144,7 @@ MonoBehaviour:
   playerSpeed: 10
   jumpForce: 18
   fallGravity: 6
+  noOfJumps: 2
   groundPoint: {fileID: 4713593284093483608}
   groundLayer:
     serializedVersion: 2

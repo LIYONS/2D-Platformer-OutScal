@@ -40,12 +40,10 @@ public class LevelManager : MonoBehaviour
     public void SetLeveLStatus(string sceneName,LevelStatus status)
     {
         PlayerPrefs.SetInt(sceneName, (int)status);
-        Debug.Log("set" + status);
     }
     public LevelStatus GetLevelStatus(string sceneName)
     {
         int status=PlayerPrefs.GetInt(sceneName);
-        Debug.Log("get" + status);
         return (LevelStatus)status;
     }
 

@@ -1542,6 +1542,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenu: {fileID: 556695429}
   levelMenu: {fileID: 1517770696}
+  buttonTexts:
+  - {fileID: 191433947}
+  - {fileID: 729222017}
+  - {fileID: 1203933066}
 --- !u!1 &1198816780
 GameObject:
   m_ObjectHideFlags: 0
