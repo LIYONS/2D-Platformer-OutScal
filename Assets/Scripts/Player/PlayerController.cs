@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     const string speed = "Speed";
     const string crouch = "Crouch";
     const string verticalSpeed = "VerticalSpeed";
-    const string isJumping = "IsJumping";
+    //const string isJumping = "IsJumping";
     const string grounded = "IsGrounded";
     Animator animator;
 
@@ -16,7 +16,8 @@ public class PlayerController : MonoBehaviour
     bool facingRight = true;
     [SerializeField] float playerSpeed;
 
-
+    //Ps
+    [SerializeField] GameObject dustPS;
     //Jump
     Rigidbody2D rb;
     [SerializeField] float jumpForce;
@@ -111,6 +112,8 @@ public class PlayerController : MonoBehaviour
     void Jump()
     {
         if (jumpCount == 0) return;
+        Instantiate(dustPS, groundPoint);
+        Debug.Log("Inst");
         rb.AddForce(new Vector2(0, jumpForce),ForceMode2D.Impulse);
         jumpCount--;
     }
