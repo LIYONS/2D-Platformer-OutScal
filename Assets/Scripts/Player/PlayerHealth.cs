@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] Image[] hearts;
-    [SerializeField] GameOverUI gameOverScript;
+    GameOverUI gameOverScript;
 
     int heartCount;
 
@@ -16,6 +16,7 @@ public class PlayerHealth : MonoBehaviour
     {
         heartCount = hearts.Length;
         animator = GetComponent<Animator>();
+        gameOverScript = gameObject.GetComponent<GameOverUI>();
     }
     public void damagePlayer()
     {

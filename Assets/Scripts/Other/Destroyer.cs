@@ -16,6 +16,5 @@ public class Destroyer : MonoBehaviour
     void DestroyObject()
     {
         Destroy(gameObject);
-        Debug.Log("Dst");
     }
 }

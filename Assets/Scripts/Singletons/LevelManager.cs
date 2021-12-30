@@ -21,11 +21,12 @@ public class LevelManager : MonoBehaviour
         if(_instance==null)
         {
             _instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(this);
         }
         else
         {
-            Destroy(this);
+            Destroy(_instance);
+            _instance = this;
         }
     }
     private void Start()

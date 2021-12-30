@@ -13,23 +13,17 @@ public class GameManager : MonoBehaviour
         if (_instance == null)
         {
             _instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(this);
         }
         else
         {
             Destroy(_instance);
             _instance = this;
         }
-
     }
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    public void Quit()
-    {
-        Application.Quit();
     }
 
     public void LoadLevel(int buildIndex)
