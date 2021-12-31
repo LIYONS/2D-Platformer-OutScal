@@ -17,8 +17,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Destroy(_instance);
-            _instance = this;
+            Destroy(this);
         }
     }
     public void Restart()

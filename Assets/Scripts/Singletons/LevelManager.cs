@@ -25,8 +25,7 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            Destroy(_instance);
-            _instance = this;
+            Destroy(this);
         }
     }
     private void Start()

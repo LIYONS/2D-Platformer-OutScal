@@ -2792,19 +2792,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicAS: {fileID: 1923695699818476178}
   sfxAS: {fileID: 1687264021013992095}
+  musicVolume: 0.5
+  sfxVolume: 0.2
   audioClips:
   - clipType: 6
     clip: {fileID: 8300000, guid: 516604db9dbf00141b71b702c4fd79c4, type: 3}
   - clipType: 7
     clip: {fileID: 8300000, guid: 0cce91cb3c5bf814e805233571eab8ea, type: 3}
   - clipType: 2
-    clip: {fileID: 8300000, guid: 31b2284e8ab3f244182080ca7da474b7, type: 3}
+    clip: {fileID: 8300000, guid: 13de3c8b19190eb488622c2982f7e977, type: 3}
   - clipType: 0
     clip: {fileID: 8300000, guid: 0651b56880a11ef45909b779443691aa, type: 3}
   - clipType: 1
     clip: {fileID: 8300000, guid: df6d1af64fdebb04d80a54b27b720509, type: 3}
   - clipType: 3
+    clip: {fileID: 8300000, guid: e5cb0976ee7cf93489107ede5175519b, type: 3}
+  - clipType: 5
     clip: {fileID: 8300000, guid: d76c71e98617e1c41a5cdc490eb1bee1, type: 3}
+  - clipType: 4
+    clip: {fileID: 8300000, guid: 31b2284e8ab3f244182080ca7da474b7, type: 3}
 --- !u!82 &1687264021013992095
 AudioSource:
   m_ObjectHideFlags: 0

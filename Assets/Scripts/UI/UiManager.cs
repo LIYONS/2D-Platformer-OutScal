@@ -4,26 +4,61 @@ using UnityEngine;
 
 public class UiManager : MonoBehaviour
 {
+    SoundManager SM;
+    LevelManager LM;
+    GameManager GM;
+    private void Start()
+    {
+        SM = SoundManager.instance;
+        if (SM == null) Debug.LogError("Sm not found");
+        LM = LevelManager.instance;
+        if (LM == null) Debug.LogError("Lm not found");
+        GM = GameManager.instance;
+        if (GM == null) Debug.LogError("Gm not found");
+
+    }
     public void LoadLevel(int buildIndex)
     {
-        if (GameManager.instance) GameManager.instance.LoadLevel(buildIndex);
-        else Debug.LogError("Gm Instance not found");
+        if (SM)
+        {
+            SM.PlaySfx(Sounds.ButtonClick);
+            if (GM)
+            {
+                GM.LoadLevel(buildIndex);
+                SM.ResetSounds();
+            }
+        }
     }
 
     public void LoadNextLevel()
     {
-        if (GameManager.instance) GameManager.instance.LoadNextLevel();
-        else Debug.LogError("Gm Instance not found");
+        if (SM)
+        {
+            SM.PlaySfx(Sounds.ButtonClick);
+            if (GM)
+            {
+                SM.ResetSounds();
+                GM.LoadNextLevel();
+            }
+        }
     }
 
     public void Quit()
     {
+        if (SM) SM.PlaySfx(Sounds.ButtonClick);
         Application.Quit();
     }
 
     public void ReStart()
     {
-        if (GameManager.instance) GameManager.instance.Restart();
-        else Debug.LogError("Gm Instance not found");
+        if (SM)
+        {
+            SM.PlaySfx(Sounds.ButtonClick);
+            if (GM)
+            {
+                GM.Restart();
+                SM.ResetSounds();
+            }
+        }
     }
 }

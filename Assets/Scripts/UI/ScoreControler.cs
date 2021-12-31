@@ -13,6 +13,8 @@ public class ScoreControler : MonoBehaviour
     }
     public void increaseScore()
     {
+        SoundManager SM = SoundManager.instance;
+        if (SM) SM.PlaySfx(Sounds.KeyCollect);
         score += scoreForKey;
         scoreText.text = "Score:" + score;
     }

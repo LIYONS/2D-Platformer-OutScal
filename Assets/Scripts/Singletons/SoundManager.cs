@@ -10,6 +10,8 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] AudioSource musicAS;
     [SerializeField] AudioSource sfxAS;
+    [SerializeField] float musicVolume;
+    [SerializeField] float sfxVolume;
 
     public SoundType[] audioClips;
 
@@ -27,6 +29,8 @@ public class SoundManager : MonoBehaviour
     }
     private void Start()
     {
+        musicAS.volume = musicVolume;
+        sfxAS.volume = sfxVolume;
         PlayMusic(Sounds.BackGround);
     }
     public void PlaySfx(Sounds sound)
@@ -52,7 +56,23 @@ public class SoundManager : MonoBehaviour
         if (item != null)  return item.clip;
         return null;
     }
+    public void StopMusic()
+    {
+        musicAS.volume = 0f;
+    }
+    public void Mute()
+    {
+        musicAS.volume = 0f;
+        sfxAS.volume = 0f;
+    }
+
+    public void ResetSounds()
+    {
+        musicAS.volume = musicVolume;
+        sfxAS.volume = sfxVolume;
+    }
 }
+
 [Serializable]
 public class SoundType
 {
@@ -64,9 +84,10 @@ public enum Sounds
 {
     BackGround,
     ButtonClick,
+    PlayerMove,
+    PlayerJump,
     Death,
     KeyCollect,
     EnemyDeath,
     TelePortUse
-    
 }

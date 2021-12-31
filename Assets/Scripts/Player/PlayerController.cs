@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     //Movement
     bool facingRight = true;
     [SerializeField] float playerSpeed;
+    [SerializeField] float soundDelay;
+    float delayCounter;
 
     //Ps
     [SerializeField] GameObject dustPS;
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float fallGravity;
     [SerializeField] int noOfJumps;
     int jumpCount;
+    SoundManager SM;
 
 
     //Ground-Check
@@ -51,6 +54,9 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         jumpCount = noOfJumps;
+        delayCounter = soundDelay;
+        SM = SoundManager.instance;
+        if (SM == null) Debug.Log("SM not found"); 
     }
     private void FixedUpdate()
     {
@@ -95,6 +101,11 @@ public class PlayerController : MonoBehaviour
     {
         if (Mathf.Abs(h) > 0)
         {
+            if (SM && isGrounded && delayCounter < Time.time)
+            {
+                SM.PlaySfx(Sounds.PlayerMove);
+                delayCounter = Time.time + soundDelay;
+            }
             if (h > 0)
             {
                 if (!facingRight) flip();
@@ -112,8 +123,8 @@ public class PlayerController : MonoBehaviour
     void Jump()
     {
         if (jumpCount == 0) return;
+        if (SM) SM.PlaySfx(Sounds.PlayerJump);
         Instantiate(dustPS, groundPoint);
-        Debug.Log("Inst");
         rb.AddForce(new Vector2(0, jumpForce),ForceMode2D.Impulse);
         jumpCount--;
     }
@@ -123,6 +134,7 @@ public class PlayerController : MonoBehaviour
     }
     void flip()
     {
+        Instantiate(dustPS, groundPoint);
         facingRight = !facingRight;
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
     }
