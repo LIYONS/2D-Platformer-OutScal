@@ -8,19 +8,28 @@ public class PlayerController : MonoBehaviour
     const string speed = "Speed";
     const string crouch = "Crouch";
     const string verticalSpeed = "VerticalSpeed";
-    const string isJumping = "IsJumping";
+    //const string isJumping = "IsJumping";
     const string grounded = "IsGrounded";
     Animator animator;
 
     //Movement
     bool facingRight = true;
     [SerializeField] float playerSpeed;
+    [SerializeField] float soundDelay;
+    float delayCounter;
 
-
+    //Ps
+    [SerializeField] GameObject dustPS;
     //Jump
     Rigidbody2D rb;
     [SerializeField] float jumpForce;
     [SerializeField] float fallGravity;
+    [SerializeField] int noOfJumps;
+    int jumpCount;
+
+    //Singleton
+    SoundManager soundManager;
+
 
     //Ground-Check
     [SerializeField] Transform groundPoint;
@@ -44,6 +53,16 @@ public class PlayerController : MonoBehaviour
         normalSize = playerCollider.size;
         normalOffset = playerCollider.offset;
     }
+    private void Start()
+    {
+        jumpCount = noOfJumps;
+        delayCounter = soundDelay;
+        soundManager = SoundManager.instance;
+        if (!soundManager)
+        {
+            Debug.Log("SM not found");
+        }
+    }
     private void FixedUpdate()
     {
         //Ground-Check
@@ -53,21 +72,38 @@ public class PlayerController : MonoBehaviour
         //Movement
         float horizontal = Input.GetAxis("Horizontal");
         Movement(horizontal);
-       
+
+        //No.of jumps setting
+        if (isGrounded && jumpCount == 0)
+        {
+            jumpCount = noOfJumps;
+        }
     }
     private void Update()
-    {   
+    {
         //Jump
-        if (Input.GetKeyDown(KeyCode.Space)) Jump();
-        if (rb.velocity.y < 0) rb.gravityScale = fallGravity; else rb.gravityScale = 1;
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Jump();
+        }
+        if (rb.velocity.y < 0)
+        {
+            rb.gravityScale = fallGravity;
+        }
+        else
+        {
+            rb.gravityScale = 1;
+        }
         JumpAnimation();
         //Crouch
         Crouch(Input.GetKey(KeyCode.LeftControl));
     }
     void Crouch(bool status)
-    { 
+    {
         if (status && animator.GetBool(crouch) || !status && !animator.GetBool(crouch))
+        {
             return;
+        }
          animator.SetBool(crouch, status);
         
         if (status)
@@ -85,23 +121,44 @@ public class PlayerController : MonoBehaviour
     {
         if (Mathf.Abs(h) > 0)
         {
-            if (h > 0)
+            if (soundManager && isGrounded && delayCounter < Time.time)
             {
-                if (!facingRight) flip();
+                soundManager.PlaySfx(Sounds.PlayerMove);
+                delayCounter = Time.time + soundDelay;
             }
-            else if (h < 0)
+            if (h > 0 && !facingRight)
             {
-                if (facingRight) flip();
+                flip();
+            }
+            else if (h < 0 && facingRight)
+            {
+                flip();
             }
             animator.SetFloat(speed, Mathf.Abs(h));
-            if (!isGrounded) rb.velocity = new Vector2(h * .5f * playerSpeed, rb.velocity.y);
-            else rb.velocity = new Vector2(h * playerSpeed, rb.velocity.y);
 
+            if (!isGrounded)
+            {
+                rb.velocity = new Vector2(h * .5f * playerSpeed, rb.velocity.y);
+            }
+            else
+            {
+                rb.velocity = new Vector2(h * playerSpeed, rb.velocity.y);
+            }
         }
     }
     void Jump()
     {
-        rb.AddForce(new Vector2(0, jumpForce),ForceMode2D.Impulse);  
+        if (jumpCount == 0)
+        {
+            return;
+        }
+        if (soundManager)
+        {
+            soundManager.PlaySfx(Sounds.PlayerJump);
+        }
+        Instantiate(dustPS, groundPoint);
+        rb.AddForce(new Vector2(0, jumpForce),ForceMode2D.Impulse);
+        jumpCount--;
     }
     void JumpAnimation()
     {
@@ -109,6 +166,7 @@ public class PlayerController : MonoBehaviour
     }
     void flip()
     {
+        Instantiate(dustPS, groundPoint);
         facingRight = !facingRight;
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
     }

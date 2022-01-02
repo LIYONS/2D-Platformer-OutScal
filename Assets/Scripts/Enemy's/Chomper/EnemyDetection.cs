@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyDetection : MonoBehaviour
@@ -18,12 +16,18 @@ public class EnemyDetection : MonoBehaviour
             movement.SetCanPatrol(false);
             if(collision.gameObject.transform.position.x>transform.position.x)
             {
-                if (!movement.GetFacingRight()) movement.Flip();
+                if (!movement.GetFacingRight())
+                {
+                    movement.Flip();
+                }
                 rb.velocity = new Vector2(movement.GetSpeed()*3, 0);
             }
             else if (collision.gameObject.transform.position.x < transform.position.x)
             {
-                if (movement.GetFacingRight()) movement.Flip();
+                if (movement.GetFacingRight())
+                {
+                    movement.Flip();
+                }
                 rb.velocity = new Vector2(-movement.GetSpeed()*3, 0);
             }
         }

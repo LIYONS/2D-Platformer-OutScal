@@ -32,15 +32,23 @@ public class ChomperMovement : MonoBehaviour
     private void FixedUpdate()
     {
         isGrounded = Physics2D.OverlapCircle(groundPoint.position, .3f, groundLayer);
-        if (!isGrounded) rb.velocity = Vector2.zero;
-        if (!isWaiting) Movement();
-
-        if (isWaiting) WaitAtCorner();
+        if (!isGrounded)
+        {
+            rb.velocity = Vector2.zero;
+        }
+        if (!isWaiting)
+        {
+            Movement();
+        }
+        else
+        {
+            WaitAtCorner();
+        }
     }
 
     private void WaitAtCorner()
     {
-        if(waitCounter==0)
+        if (waitCounter == 0)
         {
             Invoke("Flip", waitingTime);
             waitCounter = 1;
@@ -64,7 +72,7 @@ public class ChomperMovement : MonoBehaviour
                     rb.velocity = new Vector2(-speed, 0);
                 }
             }
-            else if (!isGrounded)
+            else
             {
                 isWaiting = true;
             }
@@ -74,8 +82,11 @@ public class ChomperMovement : MonoBehaviour
     public void Flip()
     {
         facingRight = !facingRight;
-        transform.localScale=new Vector3( transform.localScale.x *-1,transform.localScale.y,transform.localScale.z);
-        if (isWaiting) isWaiting = false;
+        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        if (isWaiting)
+        {
+            isWaiting = false;
+        }
     }
     public void SetCanPatrol(bool status)
     {
