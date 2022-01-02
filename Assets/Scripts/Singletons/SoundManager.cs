@@ -17,14 +17,15 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
-        if (_instance == null)
+        if (_instance)
         {
-            _instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            Destroy(this.gameObject);
+           
         }
         else
         {
-            Destroy(this.gameObject);
+            _instance = this;
+            DontDestroyOnLoad(this.gameObject);
         }
     }
     private void Start()

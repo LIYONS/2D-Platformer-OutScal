@@ -5,38 +5,41 @@ using UnityEngine.SceneManagement;
 public class LevelWin : MonoBehaviour
 {
     [SerializeField] GameObject winCanvas;
-    SoundManager SM;
-    LevelManager LM;
+    SoundManager soundManager;
+    LevelManager levelManager;
 
     private void Start()
     {
         winCanvas.SetActive(false);
-        SM = SoundManager.instance;
-        if (SM == null)     Debug.LogError("Sm not found");
-        LM = LevelManager.instance;
-        if (LM == null)     Debug.LogError("Lm not found");
-    }   
+        soundManager = SoundManager.instance;
+        if (soundManager == null)
+        {
+            Debug.LogError("Sm not found");
+        }
+        levelManager = LevelManager.instance;
+        if (levelManager == null)
+        {
+            Debug.LogError("Lm not found");
+        }
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag=="Player")
+        if (collision.gameObject.tag == "Player")
         {
             winCanvas.SetActive(true);
-            if (SM)     SM.PlaySfx(Sounds.TelePortUse);
+            if (soundManager) soundManager.PlaySfx(Sounds.TelePortUse);
             collision.gameObject.SetActive(false);
 
-            if (LM)
+            if (levelManager)
             {
                 Scene scene = SceneManager.GetActiveScene();
-                if (PlayerPrefs.GetInt(LM.levelNames[scene.buildIndex]) != (int)LevelStatus.Completed)
+                if (PlayerPrefs.GetInt(levelManager.levelNames[scene.buildIndex]) != (int)LevelStatus.Completed)
                 {
-                    LM.SetLeveLStatus(scene.name, LevelStatus.Completed);
+                    levelManager.SetLeveLStatus(scene.name, LevelStatus.Completed);
                 }
-                if (scene.buildIndex < LM.levelNames.Length - 1)
+                if (scene.buildIndex < levelManager.levelNames.Length - 1 && PlayerPrefs.GetInt(levelManager.levelNames[scene.buildIndex + 1]) != (int)LevelStatus.Unlocked)
                 {
-                    if (PlayerPrefs.GetInt(LM.levelNames[scene.buildIndex+1]) != (int)LevelStatus.Unlocked)
-                    {
-                        LevelManager.instance.SetLeveLStatus(LM.levelNames[scene.buildIndex + 1], LevelStatus.Unlocked);
-                    }
+                    LevelManager.instance.SetLeveLStatus(levelManager.levelNames[scene.buildIndex + 1], LevelStatus.Unlocked);
                 }
             }
         }

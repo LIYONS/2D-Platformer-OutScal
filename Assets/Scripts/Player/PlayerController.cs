@@ -26,7 +26,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float fallGravity;
     [SerializeField] int noOfJumps;
     int jumpCount;
-    SoundManager SM;
+
+    //Singleton
+    SoundManager soundManager;
 
 
     //Ground-Check
@@ -55,8 +57,11 @@ public class PlayerController : MonoBehaviour
     {
         jumpCount = noOfJumps;
         delayCounter = soundDelay;
-        SM = SoundManager.instance;
-        if (SM == null) Debug.Log("SM not found"); 
+        soundManager = SoundManager.instance;
+        if (!soundManager)
+        {
+            Debug.Log("SM not found");
+        }
     }
     private void FixedUpdate()
     {
@@ -69,21 +74,36 @@ public class PlayerController : MonoBehaviour
         Movement(horizontal);
 
         //No.of jumps setting
-        if (isGrounded && jumpCount == 0) jumpCount = noOfJumps;
+        if (isGrounded && jumpCount == 0)
+        {
+            jumpCount = noOfJumps;
+        }
     }
     private void Update()
-    {   
+    {
         //Jump
-        if (Input.GetKeyDown(KeyCode.Space)) Jump();
-        if (rb.velocity.y < 0) rb.gravityScale = fallGravity; else rb.gravityScale = 1;
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Jump();
+        }
+        if (rb.velocity.y < 0)
+        {
+            rb.gravityScale = fallGravity;
+        }
+        else
+        {
+            rb.gravityScale = 1;
+        }
         JumpAnimation();
         //Crouch
         Crouch(Input.GetKey(KeyCode.LeftControl));
     }
     void Crouch(bool status)
-    { 
+    {
         if (status && animator.GetBool(crouch) || !status && !animator.GetBool(crouch))
+        {
             return;
+        }
          animator.SetBool(crouch, status);
         
         if (status)
@@ -101,29 +121,41 @@ public class PlayerController : MonoBehaviour
     {
         if (Mathf.Abs(h) > 0)
         {
-            if (SM && isGrounded && delayCounter < Time.time)
+            if (soundManager && isGrounded && delayCounter < Time.time)
             {
-                SM.PlaySfx(Sounds.PlayerMove);
+                soundManager.PlaySfx(Sounds.PlayerMove);
                 delayCounter = Time.time + soundDelay;
             }
-            if (h > 0)
+            if (h > 0 && !facingRight)
             {
-                if (!facingRight) flip();
+                flip();
             }
-            else if (h < 0)
+            else if (h < 0 && facingRight)
             {
-                if (facingRight) flip();
+                flip();
             }
             animator.SetFloat(speed, Mathf.Abs(h));
-            if (!isGrounded) rb.velocity = new Vector2(h * .5f * playerSpeed, rb.velocity.y);
-            else rb.velocity = new Vector2(h * playerSpeed, rb.velocity.y);
 
+            if (!isGrounded)
+            {
+                rb.velocity = new Vector2(h * .5f * playerSpeed, rb.velocity.y);
+            }
+            else
+            {
+                rb.velocity = new Vector2(h * playerSpeed, rb.velocity.y);
+            }
         }
     }
     void Jump()
     {
-        if (jumpCount == 0) return;
-        if (SM) SM.PlaySfx(Sounds.PlayerJump);
+        if (jumpCount == 0)
+        {
+            return;
+        }
+        if (soundManager)
+        {
+            soundManager.PlaySfx(Sounds.PlayerJump);
+        }
         Instantiate(dustPS, groundPoint);
         rb.AddForce(new Vector2(0, jumpForce),ForceMode2D.Impulse);
         jumpCount--;

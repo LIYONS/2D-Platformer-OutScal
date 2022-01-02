@@ -1205,8 +1205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf9b73f9ee74f1d4bbabbe29a2ad4ac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GUI: {fileID: 1360090940}
-  gameOvercanvas: {fileID: 825540236}
+  guiCanvas: {fileID: 1360090940}
+  gameOverCanvas: {fileID: 825540236}
   bloodPS: {fileID: 6914924866167428827, guid: b967eaaac380e47449a4f84a66cfa18a, type: 3}
 --- !u!4 &611419601
 Transform:

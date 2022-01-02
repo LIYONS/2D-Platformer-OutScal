@@ -4,60 +4,69 @@ using UnityEngine;
 
 public class UiManager : MonoBehaviour
 {
-    SoundManager SM;
-    LevelManager LM;
-    GameManager GM;
+    SoundManager soundManager;
+    LevelManager levelManager;
+    GameManager gameManager;
     private void Start()
     {
-        SM = SoundManager.instance;
-        if (SM == null) Debug.LogError("Sm not found");
-        LM = LevelManager.instance;
-        if (LM == null) Debug.LogError("Lm not found");
-        GM = GameManager.instance;
-        if (GM == null) Debug.LogError("Gm not found");
+        soundManager = SoundManager.instance;
+        if (soundManager == null)
+        {
+            Debug.LogError("Sm not found");
+        }
+        levelManager = LevelManager.instance;
+        if (levelManager == null)
+        {
+            Debug.LogError("Lm not found");
+        }
+        gameManager = GameManager.instance;
+        if (gameManager == null)
+        {
+            Debug.LogError("Gm not found");
+        }
 
     }
     public void LoadLevel(int buildIndex)
     {
-        if (SM)
+        if (soundManager)
         {
-            SM.PlaySfx(Sounds.ButtonClick);
-            if (GM)
+            soundManager.PlaySfx(Sounds.ButtonClick);
+            if (gameManager)
             {
-                GM.LoadLevel(buildIndex);
-                SM.ResetSounds();
+                gameManager.LoadLevel(buildIndex);
+                soundManager.ResetSounds();
             }
         }
     }
 
     public void LoadNextLevel()
     {
-        if (SM)
+        if (soundManager)
         {
-            SM.PlaySfx(Sounds.ButtonClick);
-            if (GM)
+            soundManager.PlaySfx(Sounds.ButtonClick);
+            if (gameManager)
             {
-                SM.ResetSounds();
-                GM.LoadNextLevel();
+                soundManager.ResetSounds();
+                gameManager.LoadNextLevel();
             }
         }
     }
 
     public void Quit()
     {
-        if (SM) SM.PlaySfx(Sounds.ButtonClick);
+        if (soundManager) soundManager.PlaySfx(Sounds.ButtonClick);
         Application.Quit();
     }
 
     public void ReStart()
     {
-        if (SM)
+        if (soundManager)
         {
-            SM.PlaySfx(Sounds.ButtonClick);
-            if (GM)
+            soundManager.PlaySfx(Sounds.ButtonClick);
+            if (gameManager)
             {
-                GM.Restart();
-                SM.ResetSounds();
+                gameManager.Restart();
+                soundManager.ResetSounds();
             }
         }
     }

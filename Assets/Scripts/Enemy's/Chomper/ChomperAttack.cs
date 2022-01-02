@@ -9,29 +9,24 @@ public class ChomperAttack : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
-
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            animator.SetBool("CanAttack",true);
-            PlayerHealth playerHealth=collision.gameObject.GetComponent<PlayerHealth>();
+            animator.SetBool("CanAttack", true);
+            PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
             playerHealth.damagePlayer();
             attackDelay = Time.time + 1f;
-
         }
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && Time.time > attackDelay)
         {
-            if (Time.time > attackDelay)
-            {
-                PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
-                playerHealth.damagePlayer();
-                attackDelay = Time.time + 1f;
-            }
+            PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+            playerHealth.damagePlayer();
+            attackDelay = Time.time + 1f;
         }
 
     }
@@ -39,5 +34,4 @@ public class ChomperAttack : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player") animator.SetBool("CanAttack", false);
     }
-
 }

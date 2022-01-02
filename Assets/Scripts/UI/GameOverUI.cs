@@ -5,24 +5,24 @@ using UnityEngine;
 public class GameOverUI : MonoBehaviour
 {
     //Game-Over
-    [SerializeField] GameObject GUI;
-    [SerializeField] GameObject gameOvercanvas;
+    [SerializeField] GameObject guiCanvas;
+    [SerializeField] GameObject gameOverCanvas;
     [SerializeField] GameObject bloodPS;
 
     private void Start()
     {
-        gameOvercanvas.SetActive(false);
+        gameOverCanvas.SetActive(false);
     }
     public void GameOver()
     {
         Instantiate(bloodPS,transform);
-        SoundManager SM = SoundManager.instance;
-        if (SM)
+        SoundManager soundManager = SoundManager.instance;
+        if (soundManager)
         {
-            SM.PlaySfx(Sounds.Death);
-            SM.StopMusic();
+            soundManager.PlaySfx(Sounds.Death);
+            soundManager.StopMusic();
         }
-        GUI.SetActive(false);
-        gameOvercanvas.SetActive(true);
+        gameOverCanvas.SetActive(false);
+        gameOverCanvas.SetActive(true);
     }
 }

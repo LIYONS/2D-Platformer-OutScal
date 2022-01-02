@@ -141,10 +141,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bfd76413de651148b0fc9167a7cedd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 10
+  playerSpeed: 12
   soundDelay: 0.2
   dustPS: {fileID: 3009585269140749383, guid: ee7387c34dc34e74ba55aa5a3a466204, type: 3}
-  jumpForce: 18
+  jumpForce: 19
   fallGravity: 6
   noOfJumps: 2
   groundPoint: {fileID: 4713593284093483608}

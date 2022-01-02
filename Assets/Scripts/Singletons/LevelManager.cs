@@ -18,23 +18,30 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        if(_instance==null)
+        if (_instance)
         {
-            _instance = this;
-            DontDestroyOnLoad(this);
+            Destroy(this);
+
         }
         else
         {
-            Destroy(this);
+            _instance = this;
+            DontDestroyOnLoad(this);
         }
     }
     private void Start()
     {
         for(int i=0; i<levelNames.Length;i++)
         {
-            if (i > firstLvlBuildIndex) SetLeveLStatus(levelNames[i], LevelStatus.Locked);
+            if (i > firstLvlBuildIndex)
+            {
+                SetLeveLStatus(levelNames[i], LevelStatus.Locked);
+            }
 
-            else SetLeveLStatus(levelNames[i], LevelStatus.Unlocked);
+            else
+            {
+                SetLeveLStatus(levelNames[i], LevelStatus.Unlocked);
+            }
         }
     }
     public void SetLeveLStatus(string sceneName,LevelStatus status)

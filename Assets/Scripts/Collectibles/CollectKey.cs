@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CollectKey : MonoBehaviour
@@ -13,17 +11,13 @@ public class CollectKey : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (canAddScore)
-        {
-            if (collision.gameObject.tag == "Player")
-            {
-                canAddScore = false;
-                animator.Play("Collected");
-                ScoreControler scoreController = collision.gameObject.GetComponent<ScoreControler>();
-                scoreController.increaseScore();
-                Invoke("DestroyKey", .6f);
-
-            }
+        if (canAddScore && collision.gameObject.tag == "Player")
+        {    
+             canAddScore = false;
+             animator.Play("Collected");
+             ScoreControler scoreController = collision.gameObject.GetComponent<ScoreControler>();
+             scoreController.increaseScore();
+             Invoke("DestroyKey", .6f); 
         }
     }
 

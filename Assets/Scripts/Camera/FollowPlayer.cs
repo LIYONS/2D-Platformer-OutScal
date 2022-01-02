@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
@@ -19,7 +17,9 @@ public class FollowPlayer : MonoBehaviour
     private void Update()
     {
         Vector3 pos = player.position;
-        if(transform.position.y>normalPos.y-5)
-        transform.position = new Vector3(player.position.x+xOffset, player.position.y+yOffset, transform.position.z);
+        if (transform.position.y > normalPos.y - 5)
+        {
+            transform.position = new Vector3(player.position.x + xOffset, player.position.y + yOffset, transform.position.z);
+        }
     }
 }
